@@ -24,5 +24,5 @@
 ## Sacude el micro:bit. ¿Qué pasa?
 
 <img width="389" height="393" alt="image" src="https://github.com/user-attachments/assets/b2bfd105-def7-4472-88e5-84c5968e8ad7" />
-Presiona el botón Send Love. ¿Qué pasa?
-### pone una carita feliz
+## Presiona el botón Send Love. ¿Qué pasa?
+### pone un corazon y una carita feliz
