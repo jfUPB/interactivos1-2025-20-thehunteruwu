@@ -27,3 +27,76 @@
 
 ## Presiona el botón Send Love. ¿Qué pasa?
 ### pone un corazon y una carita feliz
+
+# Actividad 04
+## Escribe el enlace a tu programa en el editor de p5.js.
+### https://editor.p5js.org/thehunteruwu/sketches/F64bFZk83
+## index.html
+ ```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Patrones Visuales Aleatorios</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Cargar la librería p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="sketch.js" defer></script>
+</head>
+<body>
+  <main>
+
+  </main>
+</body>
+</html>
+ ```
+## Sketch.js
+```
+function setup() {
+  createCanvas(800, 800);
+  noStroke();
+  frameRate(12); 
+}
+
+function draw() {
+  background(20, 20, 30, 50);
+  let t = frameCount * 0.05;
+  let numShapes = int(random(5, 20));
+
+  for (let i = 0; i < numShapes; i++) {
+    let angle = random(TWO_PI);
+    let radius = random(50, 250);
+    let x = width / 2 + radius * cos(angle + t);
+    let y = height / 2 + radius * sin(angle - t);
+
+    let size = random(10, 80);
+    let r = 100 + 155 * sin(t + i);
+    let g = 100 + 155 * sin(t + i * 2);
+    let b = 100 + 155 * cos(t + i * 3);
+
+    fill(r, g, b, 150);
+    ellipse(x, y, size, size);
+  }
+}
+```
+## style.js
+```
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+main {
+  padding-top: 20px;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid white;
+}
+```
