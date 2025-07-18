@@ -15,14 +15,15 @@
 ### La diferenecia entre el arte y el diseño, es que el arte esta hecho para expresar las ideas del artista, las ideas del que crea el programa. en cambio el diseño está para satisfacer a un cliente, a alguien más, está para cumplir con las ideas de otro.
 
 # Actividad 03
-<img width="545" height="894" alt="image" src="https://github.com/user-attachments/assets/b7465cb2-dfe1-439d-afba-d138a1c83be9" />
+<img width="545" height="894" alt="image" src="https://github.com/user-attachments/assets/b7465cb2-dfe1-439d-afba-d138a1c83be9" />.
 ## Presiona los botones A y B del micro:bit.
 
-<img width="406" height="397" alt="image" src="https://github.com/user-attachments/assets/ec54e74a-b438-46db-b14d-3573597a81a4" />
+<img width="406" height="397" alt="image" src="https://github.com/user-attachments/assets/ec54e74a-b438-46db-b14d-3573597a81a4" />.
 
-<img width="401" height="390" alt="image" src="https://github.com/user-attachments/assets/b9260e2b-363a-40e3-a622-cfc5fcc3169c" />
+<img width="401" height="390" alt="image" src="https://github.com/user-attachments/assets/b9260e2b-363a-40e3-a622-cfc5fcc3169c" />.
 ## Sacude el micro:bit. ¿Qué pasa?
 
-<img width="389" height="393" alt="image" src="https://github.com/user-attachments/assets/b2bfd105-def7-4472-88e5-84c5968e8ad7" />
+<img width="389" height="393" alt="image" src="https://github.com/user-attachments/assets/b2bfd105-def7-4472-88e5-84c5968e8ad7" />.
+
 ## Presiona el botón Send Love. ¿Qué pasa?
 ### pone un corazon y una carita feliz
