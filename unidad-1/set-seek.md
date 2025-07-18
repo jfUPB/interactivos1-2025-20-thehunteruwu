@@ -100,3 +100,7 @@ canvas {
   border: 2px solid white;
 }
 ```
+<img width="1106" height="750" alt="image" src="https://github.com/user-attachments/assets/c704fa87-1377-4a9d-b244-e256cbe3f893" />
+
+<img width="688" height="664" alt="image" src="https://github.com/user-attachments/assets/55d6fdc2-eb9a-4b33-8c71-16a2037d605b" />
+<img width="660" height="668" alt="image" src="https://github.com/user-attachments/assets/56893e51-2cbe-4416-85f7-3cc6ed0823ea" />
