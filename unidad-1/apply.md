@@ -2,7 +2,14 @@
 
 ## 🛠 Fase: Apply
 
-## Actividad 6
+# Actividad 5
+
+## explica cómo funciona el sistema físico interactivo que acabamos de crear.
+
+### El programa funciona mediante inputs y outputs, lo primero es configurar el microbit, una de las computadoras, a esta le decimos que al presionar un boton (a) presione la tecla A, y mientras que no esté presionada muestre la tecla N.
+ahora creamos el programa en p5, lo pirmero es crear el canvas, y configurar la coneccion con el microbit. despues lo que hacemos es crear un rectangulo en el centro, y lo que hacemos basicamente es; Al ejecutar el programa, este limpia todas las entradas, borra toda la informacion, despues le decimos que mientras la tecla N esté presionada pinte el cuadro de verde, recordemos que el sistema muestra la tecla N presionada cuando la tecla A no está presionada. Antes de esto le indicamos al programa que al presionar la tecla A. pinte el rectangulo de rojo, por ende en este caso los imputs del programa serian, conectar el microbit, y lo que pasa al presionar, o no presionar el botón a. Y los ouputs serian conectar el micro bit, limpiar el sistema, pintar el cuadro de verde cuando ninguna tecla esté presionada, y pintar el Rectangulo de rojo cuando la tecla asignada esté presionada.
+
+# Actividad 6
 ### https://editor.p5js.org/thehunteruwu/sketches/Ny_DbNips
 ## p5
 ### Html
