@@ -17,7 +17,9 @@ Siempre me gustó el tema de los visuales en la musica, ahora me gustaria explor
 
 El diseño y el arte generativo, lo interpreto como un producto, un programa, osea un conjunto de reglas que haces para crear algo, la cuestion está en que estas reglas tienen que estár hechas para que el programa sea autonomo, osea que, yo le doy la orden de lo que quiero pero el programa debe darme un resultado unico, dieferente, basicamente  se crea un sistema automatizado donde yo le digo que quiero algo que cumpla ciertas caracteristicas, pero no le digo cual va a ser el resultado final, por ende el programa tiene un grado de independencia.
 
-#### La diferenecia entre el arte y el diseño, es que el arte esta hecho para expresar las ideas del artista, las ideas del que crea el programa. en cambio el diseño está para satisfacer a un cliente, a alguien más, está para cumplir con las ideas de otro.
+#### La diferenecia entre el arte y el diseño, 
+
+Es que el arte esta hecho para expresar las ideas del artista, las ideas del que crea el programa. en cambio el diseño está para satisfacer a un cliente, a alguien más, está para cumplir con las ideas de otro.
 
 ### Actividad 03
 <img width="545" height="894" alt="image" src="https://github.com/user-attachments/assets/b7465cb2-dfe1-439d-afba-d138a1c83be9" />.
