@@ -112,7 +112,7 @@ canvas {
 
 **Micro:Bit**
 
-```
+``` py
 from microbit import *
 
 uart.init(baudrate=115200)
