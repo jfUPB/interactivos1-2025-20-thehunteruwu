@@ -32,3 +32,74 @@ Accines: Son las imagenes que se muestran en el display, o mejor dicho son el re
 **3.Describe y aplica al menos 3 vectores de prueba para el programa. Para definir un vector de prueba debes llevar al sistema a un estado, generar los eventos y observar el estado siguiente y las acciones que ocurrirán. Por tanto, un vector de prueba tiene unas condiciones iniciales del sistema, unos resultados esperados y los resultados realmente obtenidos. Si el resultado obtenido es igual al esperado entonces el sistema pasó el vector de prueba, de lo contrario el sistema puede tener un error.**
 
 <img width="614" height="656" alt="image" src="https://github.com/user-attachments/assets/25b852cf-e4f5-4a59-8add-3e5e035f1d84" />
+
+
+
+**MicroBit**
+
+
+```
+
+from microbit import *
+import utime
+
+STATE_INIT = 0
+STATE_HAPPY = 1
+STATE_SMILE = 2
+STATE_SAD = 3
+
+HAPPY_INTERVAL = 1500
+SMILE_INTERVAL = 1000
+SAD_INTERVAL = 2000
+
+current_state = STATE_INIT
+start_time = 0
+interval = 0
+
+while True:
+    if current_state == STATE_INIT:
+        display.show(Image.HAPPY)
+        start_time = utime.ticks_ms()
+        interval = HAPPY_INTERVAL
+        current_state = STATE_HAPPY
+
+    elif current_state == STATE_HAPPY:
+        if button_a.was_pressed():
+            display.show(Image.SAD)
+            start_time = utime.ticks_ms()
+            interval = SAD_INTERVAL
+            current_state = STATE_SAD
+        elif utime.ticks_diff(utime.ticks_ms(), start_time) > interval:
+            display.show(Image.SMILE)
+            start_time = utime.ticks_ms()
+            interval = SMILE_INTERVAL
+            current_state = STATE_SMILE
+
+    elif current_state == STATE_SMILE:
+        if button_a.was_pressed():
+            display.show(Image.HAPPY)
+            start_time = utime.ticks_ms()
+            interval = HAPPY_INTERVAL
+            current_state = STATE_HAPPY
+        elif utime.ticks_diff(utime.ticks_ms(), start_time) > interval:
+            display.show(Image.SAD)
+            start_time = utime.ticks_ms()
+            interval = SAD_INTERVAL
+            current_state = STATE_SAD
+
+    elif current_state == STATE_SAD:
+        if button_a.was_pressed():
+            display.show(Image.SMILE)
+            start_time = utime.ticks_ms()
+            interval = SMILE_INTERVAL
+            current_state = STATE_SMILE
+        elif utime.ticks_diff(utime.ticks_ms(), start_time) > interval:
+            display.show(Image.HAPPY)
+            start_time = utime.ticks_ms()
+            interval = HAPPY_INTERVAL
+            current_state = STATE_HAPPY
+
+    sleep(50) 
+
+
+```
