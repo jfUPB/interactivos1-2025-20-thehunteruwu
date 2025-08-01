@@ -17,6 +17,91 @@ El paso del tiempo que se mide mediante utime.ticks_ms(), y utime.ticks_diff()  
 **¿Cuáles son las acciones en el programa?**
 Crea los pixeles en su posicion inicial y estado inicial que es apagado y crea cada uno con un intervalo distinto, se configuran los pixeles, y se establece el estado de prendido y apagado y luego se muestran los pixeles en su posicion en el microbit usa los tiks para medir el tiempo que pasa cuando está encendido o apagado y cuando pasa el intervalo de tiempo definido lo apaga o lo enciende.
 
+### Actividad 2
+
+**1.Escribe el código que soluciona este problema en tu bitácora.**
+
+Micro:Bit
+
+``` py
+from microbit import *
+import utime
+
+class Pixel:
+    def __init__(self, pixelX, pixelY, initState, interval):
+        self.state = "Init"
+        self.startTime = 0
+        self.interval = interval
+        self.pixelX = pixelX
+        self.pixelY = pixelY
+        self.pixelState = initState
+
+    def turn_on(self):
+        self.pixelState = 9
+        display.set_pixel(self.pixelX, self.pixelY, self.pixelState)
+
+    def turn_off(self):
+        self.pixelState = 0
+        display.set_pixel(self.pixelX, self.pixelY, self.pixelState)
+
+    def update(self):
+        # Aquí solo mantenemos el estado actual del pixel,
+        # no se usa el toggle automático del código base para esta versión
+        display.set_pixel(self.pixelX, self.pixelY, self.pixelState)
+
+# Posiciones de los LEDs para rojo, amarillo y verde
+pixel_rojo = Pixel(2, 0, 0, 0)
+pixel_amarillo = Pixel(2, 2, 0, 0)
+pixel_verde = Pixel(2, 4, 0, 0)
+
+# Duraciones en milisegundos
+TIEMPO_ROJO = 3000
+TIEMPO_AMARILLO = 1000
+TIEMPO_VERDE = 3000
+
+# Máquina de estados para el semáforo
+estado = "ROJO"
+startTime = utime.ticks_ms()
+
+while True:
+    ahora = utime.ticks_ms()
+
+    if estado == "ROJO":
+        pixel_rojo.turn_on()
+        pixel_amarillo.turn_off()
+        pixel_verde.turn_off()
+        if utime.ticks_diff(ahora, startTime) > TIEMPO_ROJO:
+            estado = "VERDE"
+            startTime = ahora
+
+    elif estado == "VERDE":
+        pixel_rojo.turn_off()
+        pixel_amarillo.turn_off()
+        pixel_verde.turn_on()
+        if utime.ticks_diff(ahora, startTime) > TIEMPO_VERDE:
+            estado = "AMARILLO"
+            startTime = ahora
+
+    elif estado == "AMARILLO":
+        pixel_rojo.turn_off()
+        pixel_amarillo.turn_on()
+        pixel_verde.turn_off()
+        if utime.ticks_diff(ahora, startTime) > TIEMPO_AMARILLO:
+            estado = "ROJO"
+            startTime = ahora
+
+    # Actualizamos los LEDs (aunque los métodos ya hacen display.set_pixel)
+    pixel_rojo.update()
+    pixel_amarillo.update()
+    pixel_verde.update()
+```
+
+**2.Identifica los estados, eventos y acciones en tu código.**
+
+Estados: Rojo, Verde, Amarillo, mientras que uno está encendido el resto están apagados.
+Eventos: Timeout para ROJO, Timeout para VERDE, Timeout para AMARILLO, en Rojo y Verde cuando pasan 3 seg y en amarillo cuando pasa un seg.
+Acciones: El programa inicia en el estado Rojo, cuando pasan 3 seg se apaga y prende el verde, cuando pasan 3 seg Verde se apaga y prende amarillo, y cuando pasa 1 Seg, amarillo se apaga y prende Rojo, y así en bucle.
+
 ### Actividad 3
 
 **1.Explica por qué decimos que este programa permite realizar de manera concurrente varias tareas.**
@@ -38,7 +123,7 @@ Accines: Son las imagenes que se muestran en el display, o mejor dicho son el re
 **MicroBit**
 
 
-```
+``` py
 
 from microbit import *
 import utime
