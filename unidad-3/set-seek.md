@@ -136,3 +136,19 @@ while True:
     buttonTask.update()
     bombTask.update()
 ```
+``` py
+test_vectors = [
+    ('CONFIG', 'A', 'Incrementar contador', 'CONFIG'),
+    ('CONFIG', 'B', 'Disminuir contador', 'CONFIG'),
+    ('CONFIG', 'S', 'Iniciar cuenta regresiva', 'ARMED'),
+    ('ARMED', 'A', 'Guardar "A" en clave', 'ARMED'),
+    ('ARMED', 'B', 'Guardar "B" en clave', 'ARMED'),
+    ('ARMED', 'A', 'Guardar "A", clave correcta, volver a CONFIG', 'CONFIG'),
+    ('ARMED', 'A', 'Guardar "A" en clave', 'ARMED'),
+    ('ARMED', 'A', 'Guardar "A" en clave', 'ARMED'),
+    ('ARMED', 'B', 'Guardar "B", clave incorrecta, reiniciar clave', 'ARMED'),
+    ('ARMED', '1s', 'Decrementar contador', 'ARMED'),
+    ('ARMED', 'contador=0', 'Mostrar SKULL', 'EXPLODED'),
+    ('EXPLODED', 'T', 'Reiniciar a CONFIG', 'CONFIG'),
+]
+```
