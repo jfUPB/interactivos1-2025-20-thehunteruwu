@@ -137,7 +137,7 @@ while True:
     bombTask.update()
 ```
 ``` py
-test_vectors = [
+vectores_de_prueba = [
     ('CONFIG', 'A', 'Incrementar contador', 'CONFIG'),
     ('CONFIG', 'B', 'Disminuir contador', 'CONFIG'),
     ('CONFIG', 'S', 'Iniciar cuenta regresiva', 'ARMED'),
@@ -152,3 +152,4 @@ test_vectors = [
     ('EXPLODED', 'T', 'Reiniciar a CONFIG', 'CONFIG'),
 ]
 ```
+
