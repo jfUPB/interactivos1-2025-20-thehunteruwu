@@ -2,7 +2,7 @@
 
 ## Código
 
-[Enlace a la aplicación a modificar]([URL](https://editor.p5js.org/thehunteruwu/sketches/FSW71z5Nl))
+[Enlace a la aplicación a modificar]([(https://editor.p5js.org/thehunteruwu/sketches/FSW71z5Nl)])
 
 Código a modificar:
 
