@@ -2,7 +2,7 @@
 
 ## Código
 
-[[Enlace a la aplicación modificada](https://editor.p5js.org/thehunteruwu/sketches/FSW71z5Nl)]
+[[Enlace a la aplicación modificada](https://editor.p5js.org/generative-design/sketches/P_2_2_6_02)]
 
 Código a modificar:
 
@@ -21,6 +21,7 @@ Código modificado:
 ## Video
 
 [Video demostratativo](URL)
+
 
 
 
