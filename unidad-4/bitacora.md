@@ -10,7 +10,7 @@ Código a modificar:
 
 ```
 
-[(https://editor.p5js.org/thehunteruwu/sketches/ya-s5j5Ok)](URL)
+[[Enlace a la aplicación modificada](https://editor.p5js.org/thehunteruwu/sketches/ya-s5j5Ok)]
 
 Código modificado:
 
@@ -21,6 +21,7 @@ Código modificado:
 ## Video
 
 [Video demostratativo](URL)
+
 
 
 
