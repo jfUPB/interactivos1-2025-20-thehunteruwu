@@ -137,3 +137,16 @@ esta linea de codigo empaqueta los valores en un formato binario
 
 2B: dos números enteros de 1 byte cada uno (los estados aState y bState convertidos a enteros 0 o 1).
 
+**¿Qué ventajas y desventajas ves en usar un formato binario en lugar de texto en ASCII?**
+
+Formato binario:
+
+Más rápido y eficiente (menos datos).
+
+Difícil de leer y requiere decodificación precisa.
+
+Formato texto ASCII:
+
+Fácil de leer y depurar.
+
+Más lento y usa más ancho de banda.
