@@ -1,6 +1,6 @@
 
 # Evidencias de la unidad 5
-## Actividad 1
+### Actividad 1
 **Describe cómo se están comunicando el micro:bit y el sketch de p5.js. ¿Qué datos envía el micro:bit?**
 
 El micro:bit envia 4 valores xValue, yValue, aState, bState, 
@@ -76,3 +76,15 @@ if (port.availableBytes() > 0) {
 | `toLowerCase() === "true"`          | Convierte el texto `"True"` o `"False"` en valores booleanos reales.               |
 | `updateButtonStates(...)`           | Llama una función que gestiona los eventos de botón.                               |
 
+**¿Cómo se generan los eventos A pressed y B released que se generan en p5.js a partir de los datos que envía el micro:bit?**
+
+En la función updateButtonStates(...):
+
+Se compara el estado actual con el anterior.
+
+Si A pasa de false → true, se detecta "A pressed".
+
+Si B pasa de true → false, se detecta "B released".
+
+## Seek: Investigación 
+### Actividad 02
