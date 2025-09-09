@@ -131,8 +131,9 @@ data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
 esta linea de codigo empaqueta los valores en un formato binario
 '>2h2B' indica cómo empaquetar los datos:
 
->: usa orden de bytes big-endian.
+/>: usa orden de bytes big-endian.
 
 2h: dos números enteros de 2 bytes cada uno (xValue y yValue).
 
 2B: dos números enteros de 1 byte cada uno (los estados aState y bState convertidos a enteros 0 o 1).
+
