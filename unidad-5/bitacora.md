@@ -42,6 +42,25 @@ Ejemplo:
 | ...      | ...           |
 | `\n`     | 10            |
 
+**Muestra y explica la parte del código de p5.js donde lee los datos del micro:bit y los transforma en coordenadas de la pantalla.**
 
+```.js
 
+if (port.availableBytes() > 0) {
+  let data = port.readUntil("\n");
+  if (data) {
+    data = data.trim();
+    let values = data.split(",");
+    if (values.length == 4) {
+      microBitX = int(values[0]) + windowWidth / 2;
+      microBitY = int(values[1]) + windowHeight / 2;
+      microBitAState = values[2].toLowerCase() === "true";
+      microBitBState = values[3].toLowerCase() === "true";
+      updateButtonStates(microBitAState, microBitBState);
+    } else {
+      print("No se están recibiendo 4 datos del micro:bit");
+    }
+  }
+}
 
+```
