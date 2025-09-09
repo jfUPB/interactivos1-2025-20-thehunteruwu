@@ -87,4 +87,52 @@ Si A pasa de false → true, se detecta "A pressed".
 Si B pasa de true → false, se detecta "B released".
 
 ## Seek: Investigación 
+
 ### Actividad 02
+
+**Caso de estudio: micro:bit**
+Vamos a transformar el caso de estudio de la unidad anterior para que ahora la comunicación entre el micro:bit y p5.js
+se realice mediante un protocolo binario.
+Primero analizaremos el código del micro:bit y en la siguiente actividad veremos cómo leer los datos en p5.js.
+
+
+```.py
+# Imports go at the top
+from microbit import *
+import struct
+uart.init(115200)
+display.set_pixel(0,0,9)
+
+while True:
+    xValue = accelerometer.get_x()
+    yValue = accelerometer.get_y()
+    aState = button_a.is_pressed()
+    bState = button_b.is_pressed()
+    data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
+    uart.write(data)
+    sleep(100) # Envia datos a 10 Hz
+
+```
+**¿Pero cómo se ven esos datos binarios?**
+<img width="972" height="194" alt="image" src="https://github.com/user-attachments/assets/56a7e2fa-a4af-4de3-a529-8c0a730ad017" />
+
+**¿Por qué se ve este resultado?**
+
+Esto se ve así porque ya pasamos de ASCII a binario, por ende toca cambiar el metodo de visualizacion a HEX.
+
+<img width="952" height="159" alt="image" src="https://github.com/user-attachments/assets/fd27c9b1-989a-4b4a-93c0-eeac9f00609f" />
+
+**¿Lo que ves ¿Cómo está relacionado con esta línea de código?**
+
+```.py
+data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
+```
+
+esta linea de codigo empaqueta los valores en un formato binario
+'>2h2B' indica cómo empaquetar los datos:
+
+>: usa orden de bytes big-endian.
+
+2h: dos números enteros de 2 bytes cada uno (xValue y yValue).
+
+2B: dos números enteros de 1 byte cada uno (los estados aState y bState convertidos a enteros 0 o 1).
