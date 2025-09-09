@@ -64,3 +64,15 @@ if (port.availableBytes() > 0) {
 }
 
 ```
+
+| Línea de código                     | ¿Qué hace?                                                                         |
+| ----------------------------------- | ---------------------------------------------------------------------------------- |
+| `port.availableBytes()`             | Verifica si hay datos nuevos en el puerto serial.                                  |
+| `port.readUntil("\n")`              | Lee una línea completa hasta el salto de línea (`\n`).                             |
+| `data.trim()`                       | Elimina espacios y saltos de línea al principio/final.                             |
+| `data.split(",")`                   | Divide la línea CSV en 4 partes: `[x, y, a, b]`.                                   |
+| `int(values[0]) + windowWidth / 2`  | Convierte el valor X del acelerómetro en una coordenada horizontal de la pantalla. |
+| `int(values[1]) + windowHeight / 2` | Hace lo mismo con el valor Y para la coordenada vertical.                          |
+| `toLowerCase() === "true"`          | Convierte el texto `"True"` o `"False"` en valores booleanos reales.               |
+| `updateButtonStates(...)`           | Llama una función que gestiona los eventos de botón.                               |
+
