@@ -248,3 +248,83 @@ struct.pack('>2h2B', -500, -1000, 0, 1)
 | 5          | `01`    | botón B presionado    |
 
 
+**Ahora realiza el siguiente experimento para comparar el envío de datos en ASCII y en binario.**
+```.py
+# Imports go at the top
+from microbit import *
+import struct
+uart.init(115200)
+display.set_pixel(0,0,9)
+
+while True:
+    if accelerometer.was_gesture('shake'):
+        xValue = accelerometer.get_x()
+        yValue = accelerometer.get_y()
+        aState = button_a.is_pressed()
+        bState = button_b.is_pressed()
+        data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
+        uart.write(data)
+        uart.write("ASCII:\n")
+        data = "{},{},{},{}\n".format(xValue, yValue, aState,bState)
+        uart.write(data)
+```
+**Captura el resultado del experimento. ¿Qué diferencias ves entre los datos en ASCII y en binario? ¿Qué ventajas y desventajas ves en usar un formato binario en lugar de texto en ASCII? ¿Qué ventajas y desventajas ves en usar un formato ASCII en lugar de binario?**
+
+
+<img width="988" height="277" alt="image" src="https://github.com/user-attachments/assets/c1b66b61-99d1-4315-ba90-58daba2174bf" />
+
+
+**Diferencias entre datos en ASCII y en binario**
+
+| Aspecto                      | Datos en binario                                           | Datos en ASCII                                                                     |
+| ---------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Representación**           | Datos empaquetados en bytes crudos                         | Datos convertidos a texto legible                                                  |
+| **Tamaño del mensaje**       | Compacto (6 bytes en este caso)                            | Más largo (varios bytes, depende de la longitud numérica + comas + salto de línea) |
+| **Facilidad de lectura**     | No legible para humanos                                    | Legible para humanos                                                               |
+| **Procesamiento**            | Necesita decodificación con `struct` u otro método binario | Puede ser parseado como texto, fácil con split y conversiones                      |
+| **Velocidad de transmisión** | Más eficiente, menos bytes a enviar                        | Menos eficiente, más bytes transmitidos                                            |
+
+
+**Ventajas y desventajas de usar formato binario**
+
+Ventajas:
+
+Menor tamaño de datos: Los valores numéricos ocupan el tamaño mínimo necesario (ej. 2 bytes para un entero corto).
+
+Transmisión rápida: Menos bytes → menos tiempo en enviar.
+
+Menor uso de ancho de banda: Importante en conexiones lentas o con limitaciones.
+
+Exactitud y precisión: No hay ambigüedad en la representación, no hay que convertir números a texto y luego volver a números.
+
+Desventajas:
+
+Difícil de leer: Para un humano no es interpretable sin herramientas específicas.
+
+Necesita procesamiento especial: En el receptor hay que saber exactamente cómo decodificar (estructura y orden de bytes).
+
+Mayor posibilidad de errores sutiles: Si se desincroniza el flujo de datos, puede perderse la referencia a qué byte corresponde a qué dato.
+
+
+**Ventajas y desventajas de usar formato ASCII (texto)**
+ 
+Ventajas:
+
+Legible para humanos: Fácil de visualizar y entender al instante.
+
+Fácil de depurar: Puedes leer datos con un simple terminal serial.
+
+Flexible: El receptor puede interpretar la cadena fácilmente con funciones comunes de texto (split, parse).
+
+No requiere conocimiento exacto de la estructura binaria.
+
+Desventajas:
+
+Tamaño más grande: Los números se convierten en caracteres, por ejemplo, el número -300 se transmite como 4 bytes ('-', '3', '0', '0'), más la coma y salto de línea.
+
+Más lento para transmitir: Más bytes → más tiempo y mayor consumo de energía.
+
+Parsing más costoso: Convertir de texto a números implica overhead computacional.
+
+Posibilidad de errores en formato: Si la cadena no está bien formateada, puede haber problemas para parsear.
+
