@@ -150,3 +150,61 @@ Formato texto ASCII:
 Fácil de leer y depurar.
 
 Más lento y usa más ancho de banda.
+
+**Ahora te voy a proponer un experimento que te permitirá ver mejor los datos. Cambia el código del micro:bit por este:**
+
+```.py
+# Imports go at the top
+from microbit import *
+import struct
+uart.init(115200)
+display.set_pixel(0,0,9)
+
+while True:
+    if accelerometer.was_gesture('shake'):
+        xValue = accelerometer.get_x()
+        yValue = accelerometer.get_y()
+        aState = button_a.is_pressed()
+        bState = button_b.is_pressed()
+        data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
+        uart.write(data)
+```
+
+<img width="975" height="211" alt="image" src="https://github.com/user-attachments/assets/820a19d9-5492-4f35-bd9b-5f6119817364" />
+
+**Captura el resultado del experimento. ¿Cuántos bytes se están enviando por mensaje? ¿Cómo se relaciona esto con el formato '>2h2B'? ¿Qué significa cada uno de los bytes que se envían?**
+
+
+Se están usando los siguientes tipos de datos:
+
+2h: dos enteros cortos (16 bits cada uno = 2 bytes cada uno) → 2 × 2 = 4 bytes
+
+2B: dos enteros sin signo de 1 byte cada uno → 2 × 1 = 2 bytes
+
+Total: 4 + 2 = 6 bytes por mensaje
+
+**¿Cómo se relaciona esto con el formato '>2h2B'?**
+
+Este formato le dice a struct.pack() cómo convertir los datos a binario:
+
+>: big-endian (orden de bytes de más significativo a menos significativo)
+
+2h: empaqueta dos valores enteros tipo short (2 bytes cada uno)
+
+2B: empaqueta dos valores tipo unsigned char (1 byte cada uno)
+
+**¿Qué significa cada uno de los bytes que se envían?**
+
+Los 6 bytes enviados representan:
+
+Bytes 0-1: Valor entero de aceleración en X (puede ir de aprox. -2048 a +2048)
+
+Bytes 2-3: Valor entero de aceleración en Y
+
+Byte 4: Estado del botón A:
+
+0 si no está presionado
+
+1 si está presionado
+
+Byte 5: Estado del botón B (igual que el A)
