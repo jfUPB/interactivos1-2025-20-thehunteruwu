@@ -187,7 +187,7 @@ Total: 4 + 2 = 6 bytes por mensaje
 
 Este formato le dice a struct.pack() cómo convertir los datos a binario:
 
->: big-endian (orden de bytes de más significativo a menos significativo)
+/>: big-endian (orden de bytes de más significativo a menos significativo)
 
 2h: empaqueta dos valores enteros tipo short (2 bytes cada uno)
 
@@ -208,3 +208,39 @@ Byte 4: Estado del botón A:
 1 si está presionado
 
 Byte 5: Estado del botón B (igual que el A)
+
+**Recuerda de la unidad anterior que es posible enviar números positivos y negativos para los valores de xValue y yValue. ¿Cómo se verían esos números en el formato '>2h2B'?**
+
+En struct.pack, los valores h (short) se codifican en complemento a dos con 16 bits.
+
+Números positivos (por ejemplo, 500) se codifican como de costumbre:
+
+500 = 0x01F4 → se codifica como: 01 F4
+
+Números negativos (por ejemplo, -300):
+
+-300 en binario complemento a dos de 16 bits = 0xFED4 → se codifica como: FE D4
+
+**Ejemplo:**
+
+```.py
+xValue = -500
+yValue = -1000
+aState = 0
+bState = 1
+
+```
+
+Resultado en bytes:
+
+```.py
+struct.pack('>2h2B', -500, -1000, 0, 1)
+# → b'\xfe\x0c\xfc\x18\x00\x01'
+
+```
+
+Byte index	Valor	Significado
+0-1	FE 0C	-500 (x)
+2-3	FC 18	-1000 (y)
+4	00	botón A no presionado
+5	01	botón B presionado
