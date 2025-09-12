@@ -287,7 +287,7 @@ while True:
 
 **Ventajas y desventajas de usar formato binario**
 
-Ventajas:
+**Ventajas:**
 
 Menor tamaño de datos: Los valores numéricos ocupan el tamaño mínimo necesario (ej. 2 bytes para un entero corto).
 
@@ -297,7 +297,7 @@ Menor uso de ancho de banda: Importante en conexiones lentas o con limitaciones.
 
 Exactitud y precisión: No hay ambigüedad en la representación, no hay que convertir números a texto y luego volver a números.
 
-Desventajas:
+**Desventajas:**
 
 Difícil de leer: Para un humano no es interpretable sin herramientas específicas.
 
@@ -308,7 +308,7 @@ Mayor posibilidad de errores sutiles: Si se desincroniza el flujo de datos, pued
 
 **Ventajas y desventajas de usar formato ASCII (texto)**
  
-Ventajas:
+**Ventajas:**
 
 Legible para humanos: Fácil de visualizar y entender al instante.
 
@@ -318,7 +318,7 @@ Flexible: El receptor puede interpretar la cadena fácilmente con funciones comu
 
 No requiere conocimiento exacto de la estructura binaria.
 
-Desventajas:
+**Desventajas:**
 
 Tamaño más grande: Los números se convierten en caracteres, por ejemplo, el número -300 se transmite como 4 bytes ('-', '3', '0', '0'), más la coma y salto de línea.
 
@@ -327,4 +327,5 @@ Más lento para transmitir: Más bytes → más tiempo y mayor consumo de energ�
 Parsing más costoso: Convertir de texto a números implica overhead computacional.
 
 Posibilidad de errores en formato: Si la cadena no está bien formateada, puede haber problemas para parsear.
+
 
