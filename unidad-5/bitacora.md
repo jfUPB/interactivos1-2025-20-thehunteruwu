@@ -239,10 +239,12 @@ struct.pack('>2h2B', -500, -1000, 0, 1)
 
 ```
 
+
 | Byte index | Valor   | Significado           |
 | ---------- | ------- | --------------------- |
 | 0-1        | `FE 0C` | `-500` (x)            |
 | 2-3        | `FC 18` | `-1000` (y)           |
 | 4          | `00`    | botón A no presionado |
 | 5          | `01`    | botón B presionado    |
+
 
