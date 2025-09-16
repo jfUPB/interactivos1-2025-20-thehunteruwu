@@ -2008,5 +2008,249 @@ function keyReleased() {
 
 ```
 <img width="939" height="785" alt="image" src="https://github.com/user-attachments/assets/161609df-5ece-4711-89d3-792c0f8f1760" />
+
+
  queria que el fondo cambiara al mismo color que tiene el pincel, pero el problema es que el nuevo color del canva se pinta sobre los trasos anteriores.
  
+```.js
+let serialBuffer = []; // Buffer para almacenar bytes recibidos
+
+let c;
+let lineModuleSize = 0;
+let angle = 0;
+let angleSpeed = 1;
+const lineModule = [];
+let lineModuleIndex = 0;
+let clickPosX = 0;
+let clickPosY = 0;
+
+let strokes = []; // Para almacenar los trazos dibujados
+
+function preload() {
+  lineModule[1] = loadImage("02.svg");
+  lineModule[2] = loadImage("03.svg");
+  lineModule[3] = loadImage("04.svg");
+  lineModule[4] = loadImage("05.svg");
+}
+
+let port;
+let connectBtn;
+let microBitConnected = false;
+
+const STATES = {
+  WAIT_MICROBIT_CONNECTION: "WAITMICROBIT_CONNECTION",
+  RUNNING: "RUNNING",
+};
+let appState = STATES.WAIT_MICROBIT_CONNECTION;
+let microBitX = 0;
+let microBitY = 0;
+let microBitAState = false;
+let microBitBState = false;
+let prevmicroBitAState = false;
+let prevmicroBitBState = false;
+
+let bColorChangeInterval = null;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(255);
+
+  port = createSerial();
+  connectBtn = createButton("Connect to micro:bit");
+  connectBtn.position(0, 0);
+  connectBtn.mousePressed(connectBtnClick);
+}
+
+function connectBtnClick() {
+  if (!port.opened()) {
+    port.open("MicroPython", 115200);
+  } else {
+    port.close();
+  }
+}
+
+function updateButtonStates(newAState, newBState) {
+  if (newAState === true && prevmicroBitAState === false) {
+    lineModuleSize = random(50, 160);
+    clickPosX = microBitX;
+    clickPosY = microBitY;
+    print("A pressed");
+  }
+
+  if (newBState === true && prevmicroBitBState === false) {
+    // Empieza cambio de color continuo cada 0.5 seg
+    if (!bColorChangeInterval) {
+      bColorChangeInterval = setInterval(() => {
+        c = color(random(255), random(255), random(255), random(80, 100));
+      }, 500);
+    }
+  }
+
+  if (newBState === false && prevmicroBitBState === true) {
+    // Detiene el cambio de color cuando se suelta el botón B
+    if (bColorChangeInterval) {
+      clearInterval(bColorChangeInterval);
+      bColorChangeInterval = null;
+    }
+    print("B released");
+  }
+
+  prevmicroBitAState = newAState;
+  prevmicroBitBState = newBState;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function readSerialData() {
+  let available = port.availableBytes();
+  if (available > 0) {
+    let newData = port.readBytes(available);
+    if (newData) {
+      serialBuffer = serialBuffer.concat(newData);
+    }
+  }
+
+  while (serialBuffer.length >= 8) {
+    if (serialBuffer[0] !== 0xaa) {
+      serialBuffer.shift();
+      continue;
+    }
+    if (serialBuffer.length < 8) break;
+
+    let packet = serialBuffer.slice(0, 8);
+    serialBuffer.splice(0, 8);
+
+    let dataBytes = packet.slice(1, 7);
+    let receivedChecksum = packet[7];
+    let computedChecksum = dataBytes.reduce((acc, val) => acc + val, 0) % 256;
+
+    if (computedChecksum !== receivedChecksum) {
+      console.log("Checksum error in packet");
+      continue;
+    }
+
+    let buffer = new Uint8Array(dataBytes).buffer;
+    let view = new DataView(buffer);
+    microBitX = view.getInt16(0) + windowWidth / 2;
+    microBitY = view.getInt16(2) + windowHeight / 2;
+    microBitAState = view.getUint8(4) === 1;
+    microBitBState = view.getUint8(5) === 1;
+    updateButtonStates(microBitAState, microBitBState);
+  }
+}
+
+function draw() {
+  if (!port.opened()) {
+    connectBtn.html("Connect to micro:bit");
+    microBitConnected = false;
+  } else {
+    microBitConnected = true;
+    connectBtn.html("Disconnect");
+  }
+
+  switch (appState) {
+    case STATES.WAIT_MICROBIT_CONNECTION:
+      if (microBitConnected === true) {
+        print("Microbit ready to draw");
+        strokeWeight(0.75);
+        c = color(181, 157, 0);
+        noCursor();
+        port.clear();
+        prevmicroBitAState = false;
+        prevmicroBitBState = false;
+        appState = STATES.RUNNING;
+      }
+      break;
+
+    case STATES.RUNNING:
+      if (microBitConnected === false) {
+        print("Waiting microbit connection");
+        cursor();
+        appState = STATES.WAIT_MICROBIT_CONNECTION;
+        break;
+      }
+
+      readSerialData();
+
+      // Cambia el fondo constantemente al color actual (transparente)
+      background(red(c), green(c), blue(c), 20);
+
+      if (microBitAState === true) {
+        // Guarda el trazo para redibujarlo
+        strokes.push({
+          x: microBitX,
+          y: microBitY,
+          size: lineModuleSize,
+          angle: angle,
+          color: c,
+          moduleIndex: lineModuleIndex,
+        });
+
+        angle += angleSpeed;
+      }
+
+      // Redibuja todos los trazos almacenados
+      for (let s of strokes) {
+        push();
+        translate(s.x, s.y);
+        rotate(radians(s.angle));
+        tint(s.color);
+        if (s.moduleIndex !== 0) {
+          image(lineModule[s.moduleIndex], 0, 0, s.size, s.size);
+        } else {
+          stroke(s.color);
+          line(0, 0, s.size, s.size);
+        }
+        pop();
+      }
+      break;
+  }
+}
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) lineModuleSize += 5;
+  if (keyCode === DOWN_ARROW) lineModuleSize -= 5;
+  if (keyCode === LEFT_ARROW) angleSpeed -= 0.5;
+  if (keyCode === RIGHT_ARROW) angleSpeed += 0.5;
+}
+
+function keyReleased() {
+  if (key === "s" || key === "S") {
+    let ts =
+      year() +
+      nf(month(), 2) +
+      nf(day(), 2) +
+      "_" +
+      nf(hour(), 2) +
+      nf(minute(), 2) +
+      nf(second(), 2);
+    saveCanvas(ts, "png");
+  }
+  if (keyCode === DELETE || keyCode === BACKSPACE) {
+    strokes = [];
+    background(255);
+  }
+
+  if (key === "d" || key === "D") {
+    angle += 180;
+    angleSpeed *= -1;
+  }
+
+  if (key === "1") c = color(181, 157, 0);
+  if (key === "2") c = color(0, 130, 164);
+  if (key === "3") c = color(87, 35, 129);
+  if (key === "4") c = color(197, 0, 123);
+
+  if (key === "5") lineModuleIndex = 0;
+  if (key === "6") lineModuleIndex = 1;
+  if (key === "7") lineModuleIndex = 2;
+  if (key === "8") lineModuleIndex = 3;
+  if (key === "9") lineModuleIndex = 4;
+}
+
+```
+<img width="930" height="785" alt="image" src="https://github.com/user-attachments/assets/ed01a24d-207e-42ac-994b-8d8be64c130f" />
+
+la solucion fue que gurde los trasos de cada frame y los pinte sobre el canva nuevo
