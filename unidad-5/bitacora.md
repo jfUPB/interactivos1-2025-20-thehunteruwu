@@ -8,5 +8,6 @@
 4. Apropiación y Articulación de Conceptos: 4.4
 
 
-**Nota final**
+**Nota final** :
 4,3
+
