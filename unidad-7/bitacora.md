@@ -129,7 +129,7 @@ Ver mensajes recibidos desde los clientes
 Detección de desconexiones
 
 ## Actividad 04
-
+```
 [1] Usuario toca en el móvil (x=120, y=250)
         |
         | touchMoved() detecta movimiento
@@ -160,3 +160,4 @@ socket.on('message', data)
    circleY = 250;
 
 🎯 CÍRCULO ROJO SE MUEVE A ESA POSICIÓN EN PANTALLA
+```
