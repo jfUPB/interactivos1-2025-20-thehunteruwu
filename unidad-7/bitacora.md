@@ -161,3 +161,6 @@ socket.on('message', data)
 
 🎯 CÍRCULO ROJO SE MUEVE A ESA POSICIÓN EN PANTALLA
 ```
+## Apply: Aplicación
+
+
