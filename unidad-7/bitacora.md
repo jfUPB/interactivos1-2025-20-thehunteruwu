@@ -165,5 +165,9 @@ socket.on('message', data)
 
 <img width="1255" height="818" alt="image" src="https://github.com/user-attachments/assets/f4cfdca4-0bf6-423b-bf5a-b6bcb8b6b08b" />
 
+<img width="784" height="930" alt="image" src="https://github.com/user-attachments/assets/3983aaa6-0f67-4b7a-8730-89f5b5d6b778" />
+
+
 https://github.com/thehunteruwu/visuales
+
 
