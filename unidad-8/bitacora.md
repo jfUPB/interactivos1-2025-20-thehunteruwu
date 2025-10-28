@@ -6,6 +6,10 @@
 
 ### Actividad 01
 
+**Link repo**
+
+https://github.com/thehunteruwu/Visuales_jazz_final
+
 <img width="734" height="408" alt="image" src="https://github.com/user-attachments/assets/21b794fd-02ea-4cb9-b204-b11a8fd930a0" />
 
 
@@ -176,5 +180,12 @@ Los colores cambian automáticamente con la música:
 7. **La música suena** → Los colores cambian solos
 
 
+**AutoEvaluacion**
 
+Actividad 1: 5
 
+la estructura está completa y está explicada detalladamente, tiene las referencias utilizadas.
+
+Actividad 2: 5
+
+La app es completamente funcional, integré todos los elementos requeridos, y la app sigue la estructura planteada.
