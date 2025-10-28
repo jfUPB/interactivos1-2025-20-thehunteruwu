@@ -10,6 +10,10 @@
 
 https://github.com/thehunteruwu/Visuales_jazz_final
 
+
+**Link Video**
+https://youtube.com/shorts/CDG3orDWeNs?si=pQyp9GNUQI6Ro9n8
+
 <img width="734" height="408" alt="image" src="https://github.com/user-attachments/assets/21b794fd-02ea-4cb9-b204-b11a8fd930a0" />
 
 
@@ -189,3 +193,4 @@ la estructura está completa y está explicada detalladamente, tiene las referen
 Actividad 2: 5
 
 La app es completamente funcional, integré todos los elementos requeridos, y la app sigue la estructura planteada.
+
